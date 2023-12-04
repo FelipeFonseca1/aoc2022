@@ -1,7 +1,7 @@
 import { load } from "https://deno.land/std@0.208.0/dotenv/mod.ts";
 import { list_files, read_input } from "../utils/mod.ts";
 
-export async function run_solutions(day: string, part2: boolean) {
+export async function run_solutions(day: string, part2: boolean, test: boolean) {
   const env = await load();
   const folder = env["LOCAL_SOLUTIONS_FOLDER"];
   const inputs_folder = env["LOCAL_RESOURCES_FOLDER"];
@@ -10,16 +10,9 @@ export async function run_solutions(day: string, part2: boolean) {
     return;
   }
   const mod = await import(`./day${day}.ts`);
-  if (part2) {
-    const input = await read_input(`${inputs_folder}day${day}_part2.txt`);
-    const result = mod.sol_part2(input);
-    console.log(`day${day} part2`, result);
-    return;
-  } else {
-    const input = await read_input(`${inputs_folder}day${day}.txt`);
-    const result = mod.sol(input);
-    console.log(`day${day}`, result);
-  }
+  const inp_name = input_file_name(test, part2, day);
+  console.log(`day${day}${part2 ? "-part2" : ""} ${test ? "WITH TEST DATA" : ""}`);
+  await run_single(`${inputs_folder}${inp_name}`, part2 ? mod.sol_part2 : mod.sol);
   console.log("Done");
 }
 
@@ -39,4 +32,17 @@ async function run_all_solutions(folder: string, inputs_folder: string) {
     console.log(name, result, "| Part2", result2);
   }
   console.log("All Done");
+}
+
+async function run_single(input_path: string, solver: (a:string)=>unknown) {
+  const input = await read_input(`${input_path}`);
+  const result = solver(input);
+  console.log(">>>  ", result);
+}
+
+function input_file_name(test: boolean, part2: boolean, day:string) {
+  if (test) {
+    return part2 ? "test_part2.txt" : "test.txt";
+  }
+  return part2 ?  `day${day}_part2.txt` : `day${day}.txt`;
 }
