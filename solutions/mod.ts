@@ -34,7 +34,7 @@ async function run_all_solutions(folder: string, inputs_folder: string) {
   console.log("All Done");
 }
 
-async function run_single(input_path: string, solver: (a:string)=>unknown) {
+async function run_single(input_path: string, solver: (a:string)=>unknown = missing_solver) {
   const input = await read_input(`${input_path}`);
   const result = solver(input);
   console.log(">>>  ", result);
@@ -45,4 +45,8 @@ function input_file_name(test: boolean, part2: boolean, day:string) {
     return part2 ? "test_part2.txt" : "test.txt";
   }
   return part2 ?  `day${day}_part2.txt` : `day${day}.txt`;
+}
+
+function missing_solver() {
+  console.log("MISSING functions sol(input: string) or sol_part2(input: string)");
 }
