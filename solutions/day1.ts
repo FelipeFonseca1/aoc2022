@@ -1,6 +1,9 @@
-import { split_lines, split_blocks } from "../utils/mod.ts";
+import { split_lines, split_blocks, split_words } from "../utils/mod.ts";
 
 export function sol(input: string) {
+  return split_blocks(input).map(sum_cals).reduce((max, cals) => {
+    return Math.max(max, cals);
+  }, 0);
   return split_blocks(input).map(sum_cals).reduce((max, cals) => {
     return Math.max(max, cals);
   }, 0);
