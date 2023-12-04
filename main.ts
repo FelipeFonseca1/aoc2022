@@ -1,8 +1,8 @@
-export function add(a: number, b: number): number {
-  return a + b;
-}
+import { run_solutions } from "./solutions/mod.ts";
+import { read_input } from "./utils/mod.ts";
 
-// Learn more at https://deno.land/manual/examples/module_metadata#concepts
 if (import.meta.main) {
-  console.log("Add 2 + 3 =", add(2, 3));
+  const day = Deno.args[0];
+  run_solutions(day, Deno.args.length > 1);
+  //read_input("./resources/day1.txt").then(str => console.log(str));
 }
