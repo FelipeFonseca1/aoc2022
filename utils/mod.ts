@@ -14,11 +14,11 @@ export async function read_input(
   file_name: string,
   bkp_file_name?: string,
 ): Promise<string> {
-  const stat = await Deno.stat(file_name);
-  if (stat) {
-    return Deno.readTextFile(file_name);
+  try {
+    return await Deno.readTextFile(file_name);
+  } catch (_) {
+    return await Deno.readTextFile(bkp_file_name || "./.env");
   }
-  return Deno.readTextFile(bkp_file_name || "./.env");
 }
 
 export async function list_files(folder: string): Promise<Array<string>> {
