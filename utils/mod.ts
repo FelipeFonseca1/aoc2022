@@ -1,8 +1,24 @@
-export {enumerate, range, first } from "https://deno.land/x/itertools@v1.1.1/mod.ts";
-export { split_lines, split_words, split_letters, split_blocks } from "./input.ts";
+export {
+  enumerate,
+  first,
+  range,
+} from "https://deno.land/x/itertools@v1.1.1/mod.ts";
+export {
+  split_blocks,
+  split_letters,
+  split_lines,
+  split_words,
+} from "./input.ts";
 
-export function read_input(file_name: string): Promise<string> {
-  return Deno.readTextFile(file_name);
+export async function read_input(
+  file_name: string,
+  bkp_file_name?: string,
+): Promise<string> {
+  const stat = await Deno.stat(file_name);
+  if (stat) {
+    return Deno.readTextFile(file_name);
+  }
+  return Deno.readTextFile(bkp_file_name || "./.env");
 }
 
 export async function list_files(folder: string): Promise<Array<string>> {

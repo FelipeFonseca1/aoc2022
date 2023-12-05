@@ -1,4 +1,4 @@
-import { split_lines, split_letters, first } from "../utils/mod.ts";
+import { first, split_letters, split_lines } from "../utils/mod.ts";
 
 export function sol(input: string) {
   return split_lines(input).map(split_half)
@@ -7,11 +7,11 @@ export function sol(input: string) {
 }
 
 function find_repeated([a, b]: Array<Set<string>> = []): string {
-  return first(a.keys(), (k:string) => b.has(k)) || "";
+  return first(a.keys(), (k: string) => b.has(k)) || "";
 }
 
 function turn_to_sets(arr: Array<string>) {
-  return arr.map(split_letters).map(letters => new Set(letters));
+  return arr.map(split_letters).map((letters) => new Set(letters));
 }
 
 function split_half(line: string) {
