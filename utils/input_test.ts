@@ -1,5 +1,10 @@
 import { assertEquals } from "https://deno.land/std@0.207.0/assert/mod.ts";
-import { split_lines, split_blocks, split_words } from "./input.ts";
+import {
+  split_blocks,
+  split_letters,
+  split_lines,
+  split_words,
+} from "./input.ts";
 
 Deno.test(function split_lines_test() {
   const text1 = `asd
@@ -27,4 +32,9 @@ Deno.test(function split_words_test() {
   const text2 = `asd qweqweqweqwe 222     333 `;
   assertEquals(split_words(text1).length, 3);
   assertEquals(split_words(text2).length, 4);
+});
+
+Deno.test(function split_letters_test() {
+  const text = "asd";
+  assertEquals(split_letters(text).length, 3);
 });
