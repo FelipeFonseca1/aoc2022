@@ -17,7 +17,7 @@ export async function read_input(
   try {
     return await Deno.readTextFile(file_name);
   } catch (_) {
-    return await Deno.readTextFile(bkp_file_name || "./.env");
+    return await Deno.readTextFile(bkp_file_name || "");
   }
 }
 
