@@ -25,14 +25,12 @@ export async function run_solutions(
       mod.sol_part2,
       `${inputs_folder}${bkp_inp_name}`,
     );
-  } else {await run_single(
+  } else {
+    await run_single(
       `${inputs_folder}${inp_name}`,
       mod.sol,
-    );}
-  await run_single(
-    `${inputs_folder}${inp_name}`,
-    part2 ? mod.sol_part2 : mod.sol,
-  );
+    );
+  }
   console.log("Done");
 }
 

@@ -28,3 +28,24 @@ export async function list_files(folder: string): Promise<Array<string>> {
   }
   return files;
 }
+
+export function tag<T>(x: T, i: number): T {
+  console.log(i, ":", x);
+  return x;
+}
+
+export function filter_tag({every, first}: Record<string, number> ={}) {
+  const predicate = [
+    (i:number) => i < 3,
+    (i:number) => i < first,
+    (i:number) => i % every === 0
+  ][every !== undefined ? 
+    2 : first !== undefined ? 
+      1 : 0];
+  return function _tag(x: unknown, i: number): boolean {
+    if (predicate(i)) {
+      console.log(i, ":", x);
+    }
+    return true;
+  }
+}
