@@ -2,6 +2,9 @@ export {
   enumerate,
   first,
   range,
+  filter,
+  map,
+  reduce
 } from "https://deno.land/x/itertools@v1.1.1/mod.ts";
 export {
   split_blocks,
