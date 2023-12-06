@@ -53,7 +53,7 @@ function update_directories({directories, path}: Data, num: number ) {
     acc_path = acc_path.concat("/", dir);
     dirs.set(acc_path, num + (dirs.get(acc_path) || 0));
     return {dirs, acc_path};
-  },{dirs: directories, acc_path: ""})["dirs"];
+  }, {dirs: directories, acc_path: ""})["dirs"];
 }
 
 function is_command(line: string) {

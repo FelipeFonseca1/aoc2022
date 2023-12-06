@@ -52,3 +52,10 @@ export function filter_tag({every, first}: Record<string, number> ={}) {
     return true;
   }
 }
+
+export function transpose<T>(arr: T[][]) {
+  return arr.reduce((transposed: T[][], line: T[]) => {
+    line.forEach((x, i) => transposed[i].push(x));
+    return transposed;
+  }, arr[0].map((_) => []));
+}
