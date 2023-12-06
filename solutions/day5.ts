@@ -1,4 +1,4 @@
-import {split_blocks, split_lines, split_letters, tag} from "../utils/mod.ts";
+import {split_blocks, split_lines, split_letters} from "../utils/mod.ts";
 
 export function sol(input: string) {
   const [stack_block, moves_block] = split_blocks(input);
